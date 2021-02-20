@@ -1,0 +1,43 @@
+.idoso {
+  width: 90%;
+  max-width: 600px;
+  padding: 1rem 0;
+  margin: 1rem auto;
+  color: black;
+  text-decoration: none;
+  display: grid;
+  grid-template-areas: 'img name age void void';
+  background-color: #eaeaea;
+  border-radius: 10px;
+  transition: .15s;
+}
+
+.idoso:hover {
+  transform: scale(1.04);
+}
+
+.idoso .idoso-image {
+  grid-area: img;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1px solid #9a9a9a;
+  align-self: center;
+  justify-self: center;
+}
+
+.idoso .idoso-nome {
+  grid-area: name;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.idoso .idoso-idade {
+  grid-area: age;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
