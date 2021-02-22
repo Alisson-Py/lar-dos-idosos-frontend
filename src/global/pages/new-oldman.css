@@ -3,5 +3,136 @@
   height: 100%;
   min-height: 100vh;
   background-color: var(--bg-color);
-  padding-top: 100px;
+  padding: 50px 0;
+}
+
+.new-oldman h1.title {
+  text-align: center;
+}
+
+.new-oldman .form {
+  width: 90%;
+  max-width: 550px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 10px;
+}
+
+.new-oldman .form .input-block {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.new-oldman .form .input-block p.title {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #555555
+}
+
+.new-oldman .form .input-block .text-input {
+  width: 100%;
+  max-width: 200px;
+  height: 35px;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid #888888;
+  border-radius: 6px;
+  padding: 0 4px;
+  color: #444444;
+
+}
+
+.new-oldman .form hr {
+  margin-bottom: 40px;
+}
+
+.new-oldman .form .input-block .gender-input-block {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-oldman .form .input-block .is-disease-block {
+  width: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-oldman .form .input-block .disease-block {
+  margin-bottom: 10px;
+}
+
+.new-oldman .form .input-block .disease-block .input-disease-block {
+  width: 100%;
+  max-width: 240px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.new-oldman .form .input-block .disease-block .input-disease-block button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  background-color: #f94a4a;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.new-oldman .form .input-block button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  background-color: #2ee624;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.new-oldman .form .input-block .medicine-titles-block,
+.new-oldman .form .input-block .medicine-input-block {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 50px;
+  margin-bottom: 10px;
+}
+
+.new-oldman .form .input-block .medicine-input-block button {
+  background-color: #f94a4a;
+  align-self: center;
+  justify-self: center;
+}
+
+.new-oldman .form .submit-btn {
+  width: 100%;
+  height: 45px;
+  background-color: #2ee624;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  letter-spacing: 0.9px;
+  color: #00204f;
+}
+
+.disable {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .new-oldman .form {
+    padding: 30px 10px;
+  }
 }
