@@ -43,7 +43,7 @@ export default function Details(props: RouteChildrenProps) {
 		(
 			<div className="details">
 				<div className="header">
-					<img src={String(oldman.avatar)} alt=""/>
+					<img src={`https://ldi-api.herokuapp.com/public/${oldman.avatar}`} alt=""/>
 					<div className="title-description">
 						<h1 className="name">{oldman.name}</h1>
 						<p className="age">{oldman.age} anos</p>
@@ -54,18 +54,26 @@ export default function Details(props: RouteChildrenProps) {
 							<h1>Doença</h1>
 							<ul>
 								{
-									oldman.disease.map((d) => {
-										return <li>{d}</li>
-									})
+									oldman.isDisease? 
+										oldman.disease.map((disease, index) => {
+											return <li key={index}>{disease}</li>
+										})
+									:
+									<div/>
 								}
 							</ul>
 						</div>
 						<div className="block medicine">
 							<h1>Remedios</h1>
 							<ul>
-								{oldman.medicine?.map((m) => {
-									return <li>{m.name}</li>
-								})}
+								{
+									oldman.isDisease?
+										oldman.medicine.map((medicine, index) => {
+											return <li key={index}>{medicine.name}</li>
+										})
+									:
+									<div/>
+								}
 							</ul>
 						</div>
 						<div className="block medication-schedule">
@@ -77,15 +85,18 @@ export default function Details(props: RouteChildrenProps) {
 									<th>Horario</th>
 								</tr>
 								{
-									oldman.medicine?.map(a => {
-										return (
-											<tr>
-												<td>{a.name}</td>
-												<td>{a.medicineQuant}</td>
-												<td>{a.medicineTimes}</td>
-											</tr>
-										)
-									})
+									oldman.isDisease?
+										oldman.medicine.map((medicine, index) => {
+											return (
+												<tr key={index}>
+													<td>{medicine.name}</td>
+													<td>{medicine.medicineQuant}</td>
+													<td>{medicine.medicineTimes}</td>
+												</tr>
+											)
+										})
+									:
+									<div/>
 								}
 							</table>
 						</div>
