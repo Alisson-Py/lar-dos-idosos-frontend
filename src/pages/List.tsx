@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import IdosoList from '../components/idosoList';
+import { Link } from 'react-router-dom';
+import IdosoList from '../components/IdosoList';
+import {AiFillPlusCircle} from 'react-icons/ai';
 
 import '../global/pages/list.css';
 import api from '../services/api';
@@ -41,6 +43,9 @@ export default function List () {
           )
         }
       </main>
+      <Link to="/create" className="redirect-create-new-oldman">
+        <AiFillPlusCircle size={38} />
+      </Link>
     </div>
   );
 }
