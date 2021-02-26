@@ -21,12 +21,13 @@
  
 
 
-* [Sobre](#Sobre)
-* [Instalação](#instalacao)
-* [Como usar](#como-usar)
-* [Pre Requisitos](#pre-requisitos)
-* [Combo](#combo)
-* [Tecnologias](#tecnologias)
+* [Sobre](#%EF%B8%8F-sobre)
+* [Instalação](#%EF%B8%8F-instalação)
+* [Como usar](#%EF%B8%8F-como-usar)
+* [Pre Requisitos](#%EF%B8%8F-pre-requisitos)
+* [Tecnologias](#%EF%B8%8F-tecnologias)
+* [Status](#%EF%B8%8F-status)
+* [Autor](#%EF%B8%8F-autor)
 
 <br/>
 
@@ -85,12 +86,12 @@
   <br/>
 
 
-## Status
+## 🚀️ Status
   🚧️ Funcional porém em construção 🚧️
 
   <br/>
 
-## Autor
+## 🚀️ Autor
 
 Alisson Silva
 
