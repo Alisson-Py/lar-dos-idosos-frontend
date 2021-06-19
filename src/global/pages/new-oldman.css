@@ -125,6 +125,9 @@
   font-weight: bold;
   letter-spacing: 0.9px;
   color: #00204f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .disable {
