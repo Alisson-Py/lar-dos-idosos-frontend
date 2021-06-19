@@ -5,30 +5,22 @@ import '../global/pages/login.css';
 import api from '../services/api';
 
 export default function Login() {
-  const {push} = useHistory();
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function handleLogin() {
-    api.get('login', {
+    api.get('/login', {
       auth: {
         username: email,
         password: password
       }
     }).then(res => {
-      push('/list');
+      localStorage.setItem('token', res.data.token);
+      history.push('/list');
     }).catch(err => {
-      if (err.message === "Network Error") {
-        alert('connection Error');
-        return;
-      }
-      if (err.response.status === 404){
-        alert('email not found');
-      };
-      if (err.response.status === 401){
-        alert('incorrect password');
-      };
-    })
+      alert('err'+err.message);
+    });
   }
 
   return (
@@ -53,10 +45,6 @@ export default function Login() {
         onChange={text => setPassword(text.target.value)}  
       />
       <button onClick ={handleLogin}>ENTRAR</button>
-      </div>
-      <div className="temp-auto-login">
-        <p>Email: all-peoples@lardosidosos.com</p>
-        <p>Password: allpeoples</p>
       </div>
     </div>
   );
