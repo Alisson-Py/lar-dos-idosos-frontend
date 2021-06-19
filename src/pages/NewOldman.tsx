@@ -9,9 +9,11 @@ export default function NewOldman() {
   const {goBack} = useHistory();
   const [name, setName] = useState<string>('');
   const [age, setAge] = useState<number>();
+  const [cpf, setCpf] = useState<number>();
+  const [rg, setRg] = useState<number>();
   const [gender, setGender] = useState<string>();
   const [isDisease, setIsDisease] = useState<boolean>(false);
-  const [avatar, setAvatar] = useState<File>();
+  const [avatar, setAvatar] = useState<ArrayBuffer | string>();
   const [disease, setDisease] = useState<string[]>(['']);
   const [medicineName, setMedicineName] = useState<string[]>(['']);
   const [medicineQuant, setMedicineQuant] = useState<string[]>(['']);
@@ -20,32 +22,35 @@ export default function NewOldman() {
 
   function handleSubmitForm(e: FormEvent) {
     e.preventDefault();
-    const data = new FormData();
-
-    
-    if (avatar) data.append('image', avatar);
-    if (name) data.append('name', name); 
-    if (age) data.append('age', age.toString());
-    if (gender) data.append('gender', gender);
-    data.append('isDisease', isDisease? 'true': 'false')
-    if (isDisease) {
-      if (disease !== ['']) data.append('disease', JSON.stringify(disease));
-      if (medicineName !== ['']) data.append('medicine', JSON.stringify(medicineName));
-      if (medicineQuant !== ['']) data.append('medicineQuant', JSON.stringify(medicineQuant));
-      if (medicineTimes !== ['']) data.append('medicineTimes', JSON.stringify(medicineTimes));
-    }
+    const token = localStorage.getItem('token');
 
     api.post(
-      'create',
-      data
+      '/oldman/create',
+      {
+        name,
+        age,
+        cpf,
+        rg,
+        gender,
+        isDisease,
+        image: avatar,
+        disease,
+        medicineName,
+        medicineQuant,
+        medicineTimes
+      },{
+        headers: {
+          authorization: `Baerer ${token}`
+        }
+      }
     ).then(res => {
-      alert('success')
+      alert('success');
       goBack();
     }).catch(err => {
       console.log(err);
-      alert('err')
-    })
-  }
+      alert('erro')
+    });
+  };
 
 
   function handleAddNewLayer(divModify: String): void {
@@ -55,16 +60,22 @@ export default function NewOldman() {
       setMedicineName([...medicineName, ''])
       setMedicineQuant([...medicineQuant, ''])
       setMedicineTimes([...medicineTimes, ''])
-    }
-  }
+    };
+  };
 
   const handleSelectAvatar = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
+    const file = new FileReader();
 
-    const selectedAvatar = Array.from(event.target.files);
+    file.readAsDataURL(event.target.files[0]);
 
-    setAvatar(selectedAvatar[0]);
-  }
+    file.onload = () => {
+      if (file.result){
+        setAvatar(file.result)
+      };
+    };
+  };
+
   return (
     <div className="new-oldman">
       <h1 className="title">Novo Cadastro</h1>
@@ -74,7 +85,7 @@ export default function NewOldman() {
           <input
             type="file"
             className="file-input"
-            onChange={handleSelectAvatar}
+            onChange={e => handleSelectAvatar(e)}
           />
         </div>
         <hr/>
@@ -94,6 +105,24 @@ export default function NewOldman() {
             className="text-input"
             value={age}
             onChange={e => setAge(Number(e.target.value))}
+          />
+        </div>
+        <div className="input-block">
+          <p className="title">CPF</p>
+          <input
+            type="number"
+            className="text-input"
+            value={cpf}
+            onChange={e => setCpf(Number(e.target.value))}
+          />
+        </div>
+        <div className="input-block">
+          <p className="title">RG</p>
+          <input
+            type="number"
+            className="text-input"
+            value={rg}
+            onChange={e => setRg(Number(e.target.value))}
           />
         </div>
         <div className="input-block">
