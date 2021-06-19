@@ -15,7 +15,7 @@ config();
 const IdosoList:FC<IdosoListTypes> = ({opnions}) => {
   return (
     <Link to={`details/${opnions.id}`} className="idoso">
-      <img src={`https://ldi-api.herokuapp.com/public/${opnions.avatar}`} alt="" className="idoso-image"/>
+      <img src={opnions.avatar} alt="" className="idoso-image"/>
       <p className="idoso-nome">{opnions.name}</p>
       <p className="idoso-idade">{opnions.age} anos</p>
     </Link>
