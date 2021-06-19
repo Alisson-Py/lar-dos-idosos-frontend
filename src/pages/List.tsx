@@ -7,18 +7,18 @@ import '../global/pages/list.css';
 import api from '../services/api';
 
 export interface OldmanTypes {
-  id: String;
-  name: String;
-  gender: String;
+  id: string;
+  name: string;
+  gender: string;
   age: Number;
-  avatar: String;
+  avatar: string;
 }
 
 export default function List () {
   const [oldmanList, setOldmanList] = useState<Array<OldmanTypes>>();
 
   useEffect(() => {
-    api.get('list').then(response => {
+    api.get('/oldman/show').then(response => {
       setOldmanList(response.data);
     }).catch(err => {
       alert('problemas ao carregar o conteudo');
