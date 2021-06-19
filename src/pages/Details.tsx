@@ -3,31 +3,28 @@ import { RouteChildrenProps } from 'react-router-dom';
 import '../global/pages/details.css';
 import api from '../services/api';
 
-interface Parms {
-	id: String
-}
 interface OldmanDetails {
-	id: String;
-  name: String;
+	id: string;
+  name: string;
   age: Number;
-  gender: String;
-  avatar: String;
+  gender: string;
+  avatar: string;
   isDisease: Boolean;
-  disease: Array<String | null>;
-  medicine: [{
-		medicineTimes: Array<String | null>;
-		medicineQuant: Array<String | null>;
-		name: Array<String | null>;
-	}];
+  disease: Array<string | null>;
+  medicine: {
+		name: [string | null];
+		quant: [string | null];
+		times: [string | null];
+	};
   
 }
 
 export default function Details(props: RouteChildrenProps) {
-	const {id} = props.match?.params as Parms;
+	const {id} = props.match?.params as {id: string};
 	const [oldman, setOldman] = useState<OldmanDetails>();
 
 	useEffect(() => {
-		api.get(`oldman/${id}`).then(response => {
+		api.get(`/oldman/details/${id}`).then(response => {
 			if (!response.data){
 				alert('Idoso nao encontrado')
 				return
@@ -43,7 +40,7 @@ export default function Details(props: RouteChildrenProps) {
 		(
 			<div className="details">
 				<div className="header">
-					<img src={`https://ldi-api.herokuapp.com/public/${oldman.avatar}`} alt=""/>
+					<img src={oldman.avatar} alt=""/>
 					<div className="title-description">
 						<h1 className="name">{oldman.name}</h1>
 						<p className="age">{oldman.age} anos</p>
@@ -68,8 +65,8 @@ export default function Details(props: RouteChildrenProps) {
 							<ul>
 								{
 									oldman.isDisease?
-										oldman.medicine.map((medicine, index) => {
-											return <li key={index}>{medicine.name}</li>
+										oldman.medicine.name.map((name, index) => {
+											return <li key={index}>{name}</li>
 										})
 									:
 									<div/>
@@ -79,25 +76,27 @@ export default function Details(props: RouteChildrenProps) {
 						<div className="block medication-schedule">
 							<h1>Horario das medicações</h1>
 							<table>
-								<tr>
-									<th>Remedio</th>
-									<th>Dose</th>
-									<th>Horario</th>
-								</tr>
-								{
-									oldman.isDisease?
-										oldman.medicine.map((medicine, index) => {
-											return (
-												<tr key={index}>
-													<td>{medicine.name}</td>
-													<td>{medicine.medicineQuant}</td>
-													<td>{medicine.medicineTimes}</td>
-												</tr>
-											)
-										})
-									:
-									<div/>
-								}
+								<tbody>
+									<tr>
+										<th>Remedio</th>
+										<th>Dose</th>
+										<th>Horario</th>
+									</tr>
+									{
+										oldman.isDisease?
+											oldman.medicine.name.map((medicine, index) => {
+												return (
+													<tr key={index}>
+														<td>{oldman.medicine.name[index]}</td>
+														<td>{oldman.medicine.quant[index]}</td>
+														<td>{oldman.medicine.times[index]}</td>
+													</tr>
+												)
+											})
+										:
+										<div/>
+									}
+								</tbody>
 							</table>
 						</div>
 					</div>
